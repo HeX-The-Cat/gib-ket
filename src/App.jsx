@@ -17,7 +17,7 @@ const App = () => {
           <br/>
 
           <label className="">
-            <input placeholder="Cat wants to say something!" className=" text-center border-solid border-2 border-black rounded-lg w-96" type="text" value={text} onChange={handleTextChange} />
+            <input placeholder="Ket wants to say something!" className=" text-center border-solid border-2 border-black rounded-lg w-96" type="text" value={text} onChange={handleTextChange} />
           </label>
         </div>
       </div>

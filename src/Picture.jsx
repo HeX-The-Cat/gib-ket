@@ -23,7 +23,7 @@ const Picture = ({text}) => {
         <img className=" max-w-[750px] max-h-[750px] rounded-xl" src={catPic} />
       </div>
 
-      <button className=" p-5 border-solid border-2 rounded-lg font-bold text-xl text-slate-50" onClick={newCat}>Gib New Cat!</button>
+      <button className=" p-5 border-solid border-2 rounded-lg font-bold text-xl text-slate-50" onClick={newCat}>Gib New Ket!</button>
     </div>
   )
 }
