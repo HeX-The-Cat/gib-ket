@@ -1,35 +1,49 @@
-import PropTypes from "prop-types"
-import { useState } from "react"
-import axios from "axios"
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 
-const Picture = ({text}) => {
-  const [catPic, setCatPic] = useState("https://cataas.com/cat")
+const Picture = ({ text }) => {
+  const [img, setImg] = useState();
 
-  const newCat = async () => {
-    if(text.trim() === "") {
-      setCatPic("")
-      await axios.get("https://cataas.com/cat")
-        .then((response) => setCatPic(response.config.url))
+  const fetchImage = async () => {
+    setImg("searching");
+    if (text.trim() === "") {
+      const res = await fetch("https://cataas.com/cat");
+      const imageBlob = await res.blob();
+      const imageObjectURL = URL.createObjectURL(imageBlob);
+      setImg(imageObjectURL);
     } else {
-      setCatPic("")
-      await axios.get(`https://cataas.com/cat/says/${text.trim()}`)
-        .then((response) => setCatPic(response.config.url))
+      const res = await fetch(`https://cataas.com/cat/says/${text.trim()}`);
+      const imageBlob = await res.blob();
+      const imageObjectURL = URL.createObjectURL(imageBlob);
+      setImg(imageObjectURL);
     }
-  }
+  };
+
+  useEffect(() => {
+    fetchImage();
+  }, []);
 
   return (
     <div className=" w-full flex flex-col justify-center items-center mt-5">
       <div className=" mb-4 w-[750px] h-[750px] flex justify-center items-center ">
-        <img className=" max-w-[750px] max-h-[750px] rounded-xl" src={catPic} />
+        {img === "searching" ? (
+          <p>Searching...</p>
+        ) : (
+          <>
+            <img className=" max-w-[750px] max-h-[750px] rounded-xl" src={img} />
+          </>
+        )}
       </div>
 
-      <button className=" p-5 border-solid border-2 rounded-lg font-bold text-xl text-slate-50" onClick={newCat}>Gib New Ket!</button>
+      <button className=" p-5 border-solid border-2 rounded-lg font-bold text-xl text-slate-50" onClick={fetchImage}>
+        Gib Another Ket!
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default Picture
+export default Picture;
 
 Picture.propTypes = {
-  text: PropTypes.string
-}
+  text: PropTypes.string,
+};

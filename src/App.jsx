@@ -1,12 +1,12 @@
-import { useState } from "react"
-import Picture from "./Picture"
+import { useState } from "react";
+import Picture from "./Picture.jsx";
 
 const App = () => {
-  const [text, setText] = useState("")
+  const [text, setText] = useState("");
 
   const handleTextChange = (event) => {
-    setText(event.target.value)
-  }
+    setText(event.target.value);
+  };
 
   return (
     <>
@@ -14,15 +14,21 @@ const App = () => {
         <div className=" flex flex-col text-center">
           <Picture text={text} />
 
-          <br/>
+          <br />
 
-          <label className="">
-            <input placeholder="Ket wants to say something!" className=" text-center border-solid border-2 border-black rounded-lg w-96" type="text" value={text} onChange={handleTextChange} />
+          <label className=" mt-5">
+            <input
+              placeholder="Ket wants to say something!"
+              className=" text-center border-solid border-2 border-black rounded-lg w-96"
+              type="text"
+              value={text}
+              onChange={handleTextChange}
+            />
           </label>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
